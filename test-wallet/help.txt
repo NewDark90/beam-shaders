@@ -1,0 +1,255 @@
+
+USAGE: beam-wallet-testnet <command> [options] [configuration rules]
+
+COMMANDS:
+  init                                  initialize new wallet database with a
+                                        new seed phrase
+  restore                               restore wallet database from a seed
+                                        phrase provided by the user
+  send                                  send BEAM
+  shader                                Invoke a wallet-side shader
+  listen                                listen to the node (the wallet won't
+                                        close till halted
+  treasury                              process treasury
+  info                                  print information about wallet balance
+                                        and transactions
+  export_miner_key                      export miner key to pass to a mining
+                                        node
+  export_owner_key                      export owner key to allow a node to
+                                        monitor owned UTXO on the blockchain
+  new_addr                              generate new SBBS address
+  cancel_tx                             cancel transaction by ID
+  delete_tx                             delete transaction by ID
+  change_address_expiration             change SBBS address expiration time
+  tx_details                            print details of the transaction with
+                                        given ID
+  payment_proof_export                  export payment proof by transaction ID
+  payment_proof_verify                  verify payment proof
+  generate_phrase                       generate new seed phrase
+  address_list                          print SBBS addresses
+  rescan                                rescan the blockchain for owned UTXO
+                                        (works only with node configured with an
+                                        owner key)
+  export_data                           export wallet data (UTXO, transactions,
+                                        addresses) to a JSON file
+  import_data                           import wallet data from a JSON file
+  block_details                         print information about specified block
+  swap_init                             initialize atomic swap
+  swap_accept                           accept atomic swap offer
+  set_swap_settings                     set generic atomic swap settings
+  show_swap_settings                    print
+                                        BTC/LTC/QTUM/DASH/DOGE/ETH-specific swap settings
+  recommended_fee_rate                  estimate
+                                        BTC/LTC/QTUM/DASH/DOGE/ETH-specific fee rate
+  get_balance                           get BTC/LTC/QTUM/DASH/DOGE/ETH balance
+  get_address                           generate transaction address for a
+                                        specific receiver (identifiable by SBBS
+                                        address or wallet identity)
+  set_confirmations_count               set count of confirmations before you
+                                        can't spend coin
+  get_confirmations_count               get count of confirmations before you
+                                        can't spend coin
+  laser                                 laser beam command
+  issue                                 issue new confidential asset
+  consume                               consume (burn) an existing confidential
+                                        asset
+  asset_reg                             register new asset with the blockchain
+  asset_unreg                           unregister asset from the blockchain
+  asset_info                            print confidential asset information
+                                        from a node
+
+OPTIONS:
+
+General:
+  -h [ --help ]                         list all available options and commands
+  -v [ --version ]                      print project version
+  --log_level arg                       set log level [error|warning|info(defau
+                                        lt)|debug|verbose]
+  --file_log_level arg                  set file log level [error|warning|info(
+                                        default)|debug|verbose]
+  --log_cleanup_days arg (=5)           old logfiles cleanup period(days)
+  --git_commit_hash                     print git commit hash value
+
+Wallet:
+  --command arg                         execute a specific command
+  --pass arg                            wallet password
+  --seed_phrase arg                     seed phrase to generate the secret key 
+                                        from according to BIP-39.
+  -a [ --amount ] arg                   amount to send (in Beams, 1 Beam = 
+                                        100,000,000 groth)
+  -f [ --fee ] arg                      transaction fee (in Groth, 100,000,000 
+                                        groth = 1 Beam)
+  -r [ --receiver_addr ] arg            receiver address or token
+  -n [ --node_addr ] arg                beam node address
+  --wallet_path arg (=wallet.db)        path to the wallet database file
+  --confirmations_count arg (=0)        count of confirmations before you can't
+                                        spend coin
+  --tx_history                          print transaction history (should be 
+                                        used with info command)
+  --utxo_list                           print the list of UTXOs (should be used
+                                        with info command)
+  --listen                              start listen after new_addr command
+  --tx_id arg                           transaction id
+  --comment arg                         comment for the newly created token or 
+                                        address
+  --expiration_time arg (=auto)         expiration time for own address 
+                                        [auto|never|now]
+  --generate_phrase                     generate seed phrase which will be used
+                                        to create a secret according to BIP-39
+  --subkey arg (=0)                     miner key index (use with 
+                                        export_miner_key)
+  --address arg (=*)                    wallet address
+  --payment_proof arg                   payment proof data to verify
+  --utxo arg                            set IDs of specific UTXO to send
+  --file_location arg (=export.dat)     path to import or export wallet data 
+                                        (should be used with 
+                                        import_data|export_data)
+  --ignore_dictionary                   ignore dictionary for a specific seed 
+                                        phrase validation
+  --node_poll_period arg (=0)           node poll period in milliseconds. Set 
+                                        to 0 to keep connection forever. Poll 
+                                        period would be no shorter than the 
+                                        expected rate of blocks if it is less 
+                                        then it will be rounded up to block 
+                                        rate value.
+  --proxy arg (=0)                      use socks5 proxy server for node 
+                                        connection
+  --proxy_addr arg (=127.0.0.1:9150)    proxy server address
+  --shader_args arg                     Arguments to pass to the shader
+  --shader_app_file arg                 Path to the app shader file
+  --shader_contract_file arg            Path to the shader file for the 
+                                        contract (if the contract is 
+                                        being-created)
+  --max_privacy                         generate max privacy transaction 
+                                        address
+  --offline_count arg                   generate offline transaction address 
+                                        with given number of payments
+  --public_offline                      generate an offline public address for 
+                                        donates (less secure, but more 
+                                        convenient)
+  --offline                             send an offline payment (offline 
+                                        transaction)
+  --block_height arg                    block height
+
+Atomic swap:
+  --reset arg                           reset altcoin's settings 
+                                        [core|electrum]
+  --active_connection arg               set active connection 
+                                        [core|electrum|none]
+  --electrum_seed arg                   bitcoin electrum seed(use space as 
+                                        separator)
+  --generate_electrum_seed              generate new electrum seed
+  --select_server_automatically arg     select electrum server automatically
+  --electrum_addr arg                   set electrum wallet address
+  --addresses_to_receive arg            number of electrum receiving addresses
+  --addresses_for_change arg            number of electrum change addresses
+  --swap_wallet_addr arg                rpc address of the swap wallet
+  --swap_wallet_user arg                rpc user name for the swap wallet
+  --swap_wallet_pass arg                rpc password for the swap wallet
+  --swap_coin arg                       swap coin currency (BTC/LTC/QTUM/DASH/D
+                                        OGE/ETH)
+  --swap_amount arg                     swap amount in the smallest unit of the
+                                        coin (e.g. satoshi for BTC)
+  --swap_feerate arg                    specific feerate you are willing to pay
+                                        (the smallest unit of the coin per KB)
+  --swap_beam_side                      should be always set by the swap party 
+                                        who owns BEAM
+  --swap_tx_history                     print swap transaction history in info 
+                                        command
+  --swap_token arg                      transaction token for atomic swap
+  --ethereum_seed arg                   ethereum seed(use space as separator)
+  --infura_project_id arg               infura project ID
+  --account_index arg                   ethereum account index
+  --should_connect arg                  connect to ethereum [true|false]
+  --eth_gas_price arg                   gas price in the gwei
+  --eth_swap_amount arg                 swap amount in the ethereums or tokens
+
+Confidential assets:
+  --asset_id arg                        asset ID
+  --asset_meta arg                      asset metadata
+  --enable_assets                       enable confidential assets transactions
+
+Laser beam:
+  --laser_channels_list                 print all opened lightning channel
+  --laser_receive                       wait for open incoming lightning 
+                                        channel
+  --laser_open                          open lightning channel
+  --laser_listen arg                    listen to lightning channels
+  --laser_send arg                      send to lightning channel
+  --laser_close arg                     close lightning channel (use before the
+                                        lock time is up, only if the other side
+                                        is online)
+  --laser_drop arg                      drop opened lightning channel (use 
+                                        after lock time is up or if the other 
+                                        side is offline)
+  --laser_delete arg                    delete closed laser channel from the 
+                                        wallet database
+  --laser_my_locked_amount arg          amount to lock in channel on the owned 
+                                        side (in Beams, 1 Beam = 100,000,000 
+                                        groth)
+  --laser_remote_locked_amount arg      amount to lock in channel on the target
+                                        side (in Beams, 1 Beam = 100,000,000 
+                                        groth)
+  --laser_address arg                   address of laser receiver
+  --laser_fee arg                       transaction fee (in GROTH, 100,000,000 
+                                        groth = 1 BEAM)
+  --laser_channel arg                   laser channel ID
+
+CONFIGURATION RULES:
+  --Emission.Value0 arg (=8000000000)   initial coinbase emission in a single 
+                                        block
+  --Emission.Drop0 arg (=525600)        height of the last block that still has
+                                        the initial emission, the drop is 
+                                        starting from the next block
+  --Emission.Drop1 arg (=2102400)       Each such a cycle there's a new drop
+  --Maturity.Coinbase arg (=240)        num of blocks before coinbase UTXO can 
+                                        be spent
+  --Maturity.Std arg (=0)               num of blocks before non-coinbase UTXO 
+                                        can be spent
+  --MaxBodySize arg (=1048576)          Max block body size [bytes]
+  --DA.Target_s arg (=60)               Desired rate of generated blocks 
+                                        [seconds]
+  --DA.MaxAhead_s arg (=900)            Block timestamp tolerance [seconds]
+  --DA.WindowWork arg (=120)            num of blocks in the window for the 
+                                        mining difficulty adjustment
+  --DA.WindowMedian0 arg (=25)          How many blocks are considered in 
+                                        calculating the timestamp median
+  --DA.WindowMedian1 arg (=7)           Num of blocks taken at both endings of 
+                                        WindowWork, to pick medians
+  --DA.Difficulty0 arg (=134217728)     Initial difficulty
+  --MaxRollback arg (=1440)             Max allowed rollback (reorg) depth
+  --Fork1 arg (=270910)                 Height of the 1st fork
+  --Fork2 arg (=690000)                 Height of the 2nd fork
+  --Fork3 arg (=1135300)                Height of the 3rd fork
+  --AllowPublicUtxos arg (=0)           set to allow regular (non-coinbase) 
+                                        UTXO to have non-confidential signature
+  --FakePoW arg (=0)                    Don't verify PoW. Mining is simulated 
+                                        by the timer. For tests only
+  --MaxKernelValidityDH arg (=43200)    Max implicit kernel lifespan after HF2 
+                                        (a.k.a. kernel visibility horizon)
+  --CA.Enabled arg (=1)                 Enable/disable CA (confidential assets)
+  --CA.DepositForList arg (=100000000000)
+                                        Deposit for new CA allocation
+  --CA.LockPeriod arg (=1440)           Lock height for deposit after the CA is
+                                        completely burned
+  --CA.m_ProofCfg.n arg (=4)            Asset type anonymity set size n (n^M)
+  --CA.m_ProofCfg.M arg (=3)            Asset type anonymity set size M (n^M)
+  --Shielded.Enabled arg (=1)           Enable/disable Shielded pool (Lelantus)
+  --Shielded.m_ProofMax.n arg (=4)      Shielded anonymity set max n (n^M)
+  --Shielded.m_ProofMax.M arg (=8)      Shielded anonymity set max M (n^M)
+  --Shielded.m_ProofMin.n arg (=4)      Shielded anonymity set min n (n^M)
+  --Shielded.m_ProofMin.M arg (=5)      Shielded anonymity set min M (n^M)
+  --Shielded.MaxWindowBacklog arg (=65536)
+                                        Shielded max backlog for large 
+                                        anonymity set
+  --Shielded.MaxIns arg (=20)           Shielded max inputs per block
+  --Shielded.MaxOuts arg (=30)          Shielded max outputs per block
+  --Prehistoric arg (=000000000000000000252d1233b45db2398147676e1662f43c26a526d2e22063)
+                                        Prehistoric hash
+  --TreasuryChecksum arg (=5d9b18789c021a1efb83d906f4ac7dce997d4ac5d471d7b46f99776e7abd2ec9)
+                                        Treasury hash, or zero to disable 
+                                        treasury
+  --Magic.v0 arg (=15)                  Fork0 magic number
+  --Magic.v2 arg (=2)                   Fork2 magic number
+  --Magic.IsTestnet arg (=1)            magic testnet indicator
+

@@ -1,0 +1,131 @@
+OPTIONS:
+
+General:
+  -h [ --help ]                         list all available options and commands
+  -v [ --version ]                      print project version
+  --log_level arg                       set log level [error|warning|info(defau
+                                        lt)|debug|verbose]
+  --file_log_level arg                  set file log level [error|warning|info(
+                                        default)|debug|verbose]
+  --log_cleanup_days arg (=5)           old logfiles cleanup period(days)
+  --git_commit_hash                     print git commit hash value
+
+Node options:
+  -p [ --port ] arg (=10000)            port to start the server on
+  --storage arg (=node.db)              node storage path
+  --mining_threads arg (=0)             number of mining threads(there is no 
+                                        mining if 0). It works if FakePoW is 
+                                        enabled
+  --pow_solve_time arg (=15000)         pow solve time. It works if FakePoW is 
+                                        enabled
+  --verification_threads arg (=-1)      number of threads for cryptographic 
+                                        verifications (0 = single thread, -1 = 
+                                        auto)
+  --nonceprefix_digits arg (=0)         number of hex digits for nonce prefix 
+                                        for stratum client (0..6)
+  --peer arg                            nodes to connect to
+  --peers_persistent arg (=0)           Keep persistent connection to the 
+                                        specified peers, regardless to ratings
+  --stratum_port arg (=0)               port to start stratum server on
+  --stratum_secrets_path arg (=.)       path to stratum server api keys file, 
+                                        and tls certificate and private key
+  --stratum_use_tls arg (=1)            enable TLS on startum server
+  --websocket_port arg (=0)             port to start websocket server on, it 
+                                        allows to communicate with node from 
+                                        web browser
+  --reset_id arg (=0)                   Reset self ID (used for network 
+                                        authentication). Must do if the node is
+                                        cloned
+  --erase_id arg (=0)                   Reset self ID (used for network 
+                                        authentication) and stop before 
+                                        re-creating the new one.
+  --print_txo arg (=0)                  Print TXO movements (create/spend) 
+                                        recognized by the owner key.
+  --print_rollback_stats arg (=0)       Analyze and print recent reverted 
+                                        branches, check if there were 
+                                        double-spends.
+  --manual_rollback arg                 Explicit rollback to height. The 
+                                        current consequent state will be 
+                                        forbidden (no automatic going up the 
+                                        same path)
+  --manual_select arg                   Explicit correct block selection at the
+                                        specified height. Auto-rollback below 
+                                        this height if current branch is 
+                                        different
+  --check_db arg (=0)                   DB integrity check
+  --vacuum arg (=0)                     DB vacuum (compact)
+  --bbs_enable arg (=1)                 Enable SBBS messaging
+  --crash arg (=0)                      Induce crash (test proper handling)
+  --owner_key arg                       Owner viewer key
+  --key_owner arg                       Owner viewer key (deprecated)
+  --miner_key arg                       Standalone miner key
+  --key_mine arg                        Standalone miner key (deprecated)
+  --pass arg                            password for keys
+  --log_utxos arg (=0)                  Log recovered UTXOs (make sure the log 
+                                        file is not exposed)
+  --fast_sync arg                       Fast sync on/off (override horizons)
+  --generate_recovery arg               Recovery file to generate immediately 
+                                        after start
+  --recovery_auto_path arg              path and file prefix for recovery 
+                                        auto-generation
+  --recovery_auto_period arg (=30)      period (in blocks) for recovery 
+                                        auto-generation
+
+CONFIGURATION RULES:
+  --Emission.Value0 arg (=8000000000)   initial coinbase emission in a single 
+                                        block
+  --Emission.Drop0 arg (=525600)        height of the last block that still has
+                                        the initial emission, the drop is 
+                                        starting from the next block
+  --Emission.Drop1 arg (=2102400)       Each such a cycle there's a new drop
+  --Maturity.Coinbase arg (=240)        num of blocks before coinbase UTXO can 
+                                        be spent
+  --Maturity.Std arg (=0)               num of blocks before non-coinbase UTXO 
+                                        can be spent
+  --MaxBodySize arg (=1048576)          Max block body size [bytes]
+  --DA.Target_s arg (=60)               Desired rate of generated blocks 
+                                        [seconds]
+  --DA.MaxAhead_s arg (=900)            Block timestamp tolerance [seconds]
+  --DA.WindowWork arg (=120)            num of blocks in the window for the 
+                                        mining difficulty adjustment
+  --DA.WindowMedian0 arg (=25)          How many blocks are considered in 
+                                        calculating the timestamp median
+  --DA.WindowMedian1 arg (=7)           Num of blocks taken at both endings of 
+                                        WindowWork, to pick medians
+  --DA.Difficulty0 arg (=134217728)     Initial difficulty
+  --MaxRollback arg (=1440)             Max allowed rollback (reorg) depth
+  --Fork1 arg (=270910)                 Height of the 1st fork
+  --Fork2 arg (=690000)                 Height of the 2nd fork
+  --Fork3 arg (=1135300)                Height of the 3rd fork
+  --AllowPublicUtxos arg (=0)           set to allow regular (non-coinbase) 
+                                        UTXO to have non-confidential signature
+  --FakePoW arg (=0)                    Don't verify PoW. Mining is simulated 
+                                        by the timer. For tests only
+  --MaxKernelValidityDH arg (=43200)    Max implicit kernel lifespan after HF2 
+                                        (a.k.a. kernel visibility horizon)
+  --CA.Enabled arg (=1)                 Enable/disable CA (confidential assets)
+  --CA.DepositForList arg (=100000000000)
+                                        Deposit for new CA allocation
+  --CA.LockPeriod arg (=1440)           Lock height for deposit after the CA is
+                                        completely burned
+  --CA.m_ProofCfg.n arg (=4)            Asset type anonymity set size n (n^M)
+  --CA.m_ProofCfg.M arg (=3)            Asset type anonymity set size M (n^M)
+  --Shielded.Enabled arg (=1)           Enable/disable Shielded pool (Lelantus)
+  --Shielded.m_ProofMax.n arg (=4)      Shielded anonymity set max n (n^M)
+  --Shielded.m_ProofMax.M arg (=8)      Shielded anonymity set max M (n^M)
+  --Shielded.m_ProofMin.n arg (=4)      Shielded anonymity set min n (n^M)
+  --Shielded.m_ProofMin.M arg (=5)      Shielded anonymity set min M (n^M)
+  --Shielded.MaxWindowBacklog arg (=65536)
+                                        Shielded max backlog for large 
+                                        anonymity set
+  --Shielded.MaxIns arg (=20)           Shielded max inputs per block
+  --Shielded.MaxOuts arg (=30)          Shielded max outputs per block
+  --Prehistoric arg (=000000000000000000252d1233b45db2398147676e1662f43c26a526d2e22063)
+                                        Prehistoric hash
+  --TreasuryChecksum arg (=5d9b18789c021a1efb83d906f4ac7dce997d4ac5d471d7b46f99776e7abd2ec9)
+                                        Treasury hash, or zero to disable 
+                                        treasury
+  --Magic.v0 arg (=15)                  Fork0 magic number
+  --Magic.v2 arg (=2)                   Fork2 magic number
+  --Magic.IsTestnet arg (=1)            magic testnet indicator
+
