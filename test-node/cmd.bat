@@ -1,0 +1,1 @@
+beam-node-testnet.exe --treasury_path=treasury.bin --owner_key= --miner_key= --pass=123

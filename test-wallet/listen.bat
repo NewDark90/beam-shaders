@@ -1,0 +1,1 @@
+beam-wallet-testnet.exe listen -n 127.0.0.1:10000

@@ -1,0 +1,31 @@
+{
+  "name": "beam-shaders",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "rust-bindgen": "bindgen \"./lib/bvm/index.hpp\" -o \"./src/bvm.rs\" --no-layout-tests --enable-cxx-namespaces --distrust-clang-mangling",
+    "rust-wasm-build": "wasm-pack build --release --target web --out-name index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NewDark90/beam-shaders.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NewDark90/beam-shaders/issues"
+  },
+  "languages": [{
+    "id": "cpp",
+    "extensions": [ ".hpp" ]
+  }],
+  "homepage": "https://github.com/NewDark90/beam-shaders#readme",
+  "dependencies": {
+    "wasm2c": "^1.0.0",
+    "wasm2js": "^0.2.0"
+  },
+  "devDependencies": {
+
+  }
+}
