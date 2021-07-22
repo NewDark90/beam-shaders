@@ -27,13 +27,20 @@ pub mod root {
     pub type HashValue512 = u8;
     pub type Secp_scalar_data = [u8; 32usize];
     #[repr(C)]
+    pub struct ILoadVarCallback__bindgen_vtable(::std::os::raw::c_void);
+    #[repr(C)]
+    #[derive(Debug, Copy, Clone)]
+    pub struct ILoadVarCallback {
+        pub vtable_: *const ILoadVarCallback__bindgen_vtable,
+    }
+    #[repr(C, packed)]
     #[derive(Debug, Copy, Clone)]
     pub struct FundsChange {
         pub m_Amount: root::Amount,
         pub m_Aid: root::AssetID,
         pub m_Consume: u8,
     }
-    #[repr(C)]
+    #[repr(C, packed)]
     #[derive(Debug, Copy, Clone)]
     pub struct SigRequest {
         pub m_pID: *const ::std::os::raw::c_void,
@@ -59,21 +66,21 @@ pub mod root {
     pub struct BlockHeader {
         pub _address: u8,
     }
-    #[repr(C)]
+    #[repr(C, packed)]
     #[derive(Debug, Copy, Clone)]
     pub struct BlockHeader_InfoBase {
         pub m_Timestamp: root::Timestamp,
         pub m_Kernels: root::HashValue,
         pub m_Definition: root::HashValue,
     }
-    #[repr(C)]
+    #[repr(C, packed)]
     #[derive(Debug, Copy, Clone)]
     pub struct BlockHeader_Info {
         pub _base: root::BlockHeader_InfoBase,
         pub m_Height: root::Height,
         pub m_Hash: root::HashValue,
     }
-    #[repr(C)]
+    #[repr(C, packed)]
     #[derive(Debug, Copy, Clone)]
     pub struct BlockHeader_Prefix {
         pub m_Height: root::Height,
@@ -86,7 +93,7 @@ pub mod root {
         pub _base: root::BlockHeader_InfoBase,
         pub m_PoW: root::BlockHeader_Element_PoW,
     }
-    #[repr(C)]
+    #[repr(C, packed)]
     #[derive(Copy, Clone)]
     pub struct BlockHeader_Element_PoW {
         pub m_pIndices: [u8; 104usize],
@@ -547,5 +554,66 @@ pub mod root {
                 nCharge: u32,
             );
         }
+        #[repr(C)]
+        #[derive(Debug)]
+        pub struct DocArray {
+            pub _address: u8,
+        }
+        #[repr(C)]
+        #[derive(Debug)]
+        pub struct DocGroup {
+            pub _address: u8,
+        }
+        #[repr(C)]
+        #[derive(Debug, Copy, Clone)]
+        pub struct KeyPrefix {
+            pub m_Cid: root::ContractID,
+            pub m_Tag: u8,
+        }
+        #[repr(C)]
+        #[derive(Debug, Copy, Clone)]
+        pub struct Key_T<T> {
+            pub m_Prefix: root::Env::KeyPrefix,
+            pub m_KeyInContract: T,
+            pub _phantom_0: ::std::marker::PhantomData<::std::cell::UnsafeCell<T>>,
+        }
+        pub type VarReader = u8;
+        #[repr(C)]
+        #[derive(Debug)]
+        pub struct LogReader {
+            pub m_Handle: u32,
+            pub m_Pos: root::HeightPos,
+        }
     }
+    pub mod Utils {
+        #[allow(unused_imports)]
+        use self::super::super::root;
+        #[repr(C)]
+        #[derive(Debug, Copy, Clone)]
+        pub struct BlobOf<T> {
+            pub m_Obj: *mut T,
+            pub _phantom_0: ::std::marker::PhantomData<::std::cell::UnsafeCell<T>>,
+        }
+    }
+    #[repr(C)]
+    #[derive(Debug, Copy, Clone)]
+    pub struct HashProcessor {
+        pub _address: u8,
+    }
+    #[repr(C)]
+    #[derive(Debug)]
+    pub struct HashProcessor_Base {
+        pub m_p: *mut root::HashObj,
+    }
+    #[repr(C)]
+    #[derive(Debug)]
+    pub struct HashProcessor_Sha256 {
+        pub _base: root::HashProcessor_Base,
+    }
+    #[repr(C)]
+    #[derive(Debug)]
+    pub struct HashProcessor_Blake2b {
+        pub _base: root::HashProcessor_Base,
+    }
+    pub const g_Beam2Groth: root::Amount = 100000000;
 }

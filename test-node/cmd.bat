@@ -1,1 +1,1 @@
-beam-node-testnet.exe --treasury_path=treasury.bin --owner_key= --miner_key= --pass=123
+beam-node-testnet.exe --treasury_path=treasury.bin --owner_key=CxLJav5eF66Ym0gVLi57FsCL2ffeLtiv2nr40mV5gNkk/9bhbjLG3L8smZczFV9H3sI6EWgiBGeM8n2vps0r8IYi7R70N1nGNArgU/JEXYlGb8heGTiWn9cK2Jy0mZFTSyOkXaXlAQtwfc5i --miner_key=sR1q5AXZ47W7QRUCvfRhhCH3JIYMlbqZoLpVwuatq4mte76MxFJc/ftvDgvVPRTEpgmLM9mgLGSS4T13TDit54X/78oK2B1tvTs= --pass=123

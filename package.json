@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "rust-bindgen": "bindgen \"./lib/bvm/index.hpp\" -o \"./src/bvm.rs\" --no-layout-tests --enable-cxx-namespaces --distrust-clang-mangling",
+    "rust-bindgen": "bindgen \"D:/Code/Repositories/beam/bvm/Shaders/common.h\" -o \"./src/bvm.rs\" --no-layout-tests --enable-cxx-namespaces --distrust-clang-mangling -- -x c++ -I \"C:\\Program Files\\boost\\boost_1_76_0\" -I \"D:/Code/Repositories/beam\"",
     "rust-wasm-build": "wasm-pack build --release --target web --out-name index"
   },
   "repository": {
@@ -16,16 +16,22 @@
   "bugs": {
     "url": "https://github.com/NewDark90/beam-shaders/issues"
   },
-  "languages": [{
-    "id": "cpp",
-    "extensions": [ ".hpp" ]
-  }],
+  "languages": [
+    {
+      "id": "cpp",
+      "extensions": [
+        ".hpp"
+      ]
+    }
+  ],
   "homepage": "https://github.com/NewDark90/beam-shaders#readme",
   "dependencies": {
+    "cpy": "^8.1.2",
+    "fs-extra": "^10.0.0",
     "wasm2c": "^1.0.0",
     "wasm2js": "^0.2.0"
   },
   "devDependencies": {
-
+    "@types/node": "^16.4.0"
   }
 }
