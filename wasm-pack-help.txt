@@ -1,0 +1,54 @@
+wasm-pack 0.10.0
+The various kinds of commands that `wasm-pack` can execute
+
+USAGE:
+    wasm-pack [FLAGS] [OPTIONS] <SUBCOMMAND>
+
+FLAGS:
+    -h, --help       Prints help information
+    -q, --quiet      No output printed to stdout
+    -V, --version    Prints version information
+    -v, --verbose    Log verbosity is based off the number of v used
+
+OPTIONS:
+        --log-level <log-level>    The maximum level of messages that should be logged by wasm-pack. [possible values:
+                                   info, warn, error] [default: info]
+
+SUBCOMMANDS:
+    build      🏗️  build your npm package!
+    help       Prints this message or the help of the given subcommand(s)
+    login      👤  Add an npm registry user account! (aliases: adduser, add-user)
+    new        🐑 create a new project with a template
+    pack       🍱  create a tar of your npm package but don't publish!
+    publish    🎆  pack up your npm package and publish!
+    test       👩‍🔬  test your wasm!
+
+
+
+wasm-pack-build 0.10.0
+🏗️  build your npm package!
+
+USAGE:
+    wasm-pack build [FLAGS] [OPTIONS] [path] [-- <extra-options>...]
+
+FLAGS:
+        --debug            Deprecated. Renamed to `--dev`
+        --dev              Create a development build. Enable debug info, and disable optimizations
+        --no-typescript    By default a *.d.ts file is generated for the generated JS file, but this flag will disable
+                           generating this TypeScript file
+    -h, --help             Prints help information
+        --profiling        Create a profiling build. Enable optimizations and debug info
+        --release          Create a release build. Enable optimizations and disable debug info
+    -V, --version          Prints version information
+
+OPTIONS:
+    -m, --mode <mode>            Sets steps to be run. [possible values: no-install, normal, force] [default: normal]
+    -d, --out-dir <out-dir>      Sets the output directory with a relative path [default: pkg]
+        --out-name <out-name>    Sets the output file names. Defaults to package name
+    -s, --scope <scope>          The npm scope to use in package.json, if any
+    -t, --target <target>        Sets the target environment. [possible values: bundler, nodejs, web, no-modules]
+                                 [default: bundler]
+
+ARGS:
+    <path>                The path to the Rust crate. If not set, searches up the path from the current directory
+    <extra-options>...    List of extra options to pass to `cargo build`
